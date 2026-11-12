@@ -1,0 +1,48 @@
+# Compiled Class & Build Directories
+target/
+backend/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Node & Frontend Build
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+build/
+.npm
+.yarn
+
+# Environment & Secret Configuration
+.env
+.env.*
+!.env.example
+*.local
+
+# IDE & Editor Files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+.factorypath
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary / Scratch Files
+*.tmp
+*.bak
