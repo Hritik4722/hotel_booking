@@ -1,5 +1,21 @@
 # 🏨 StayHaven – Full-Stack Hotel Booking Portal
 
+[![Watch Full Demo Video on YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/rni0sTSGE2I)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+
+> [!IMPORTANT]
+> ### 🎬 Live Project Demonstration & Video Walkthrough
+> **Watch the full application walkthrough on YouTube:**
+>
+> [![Watch StayHaven Demo Video on YouTube](https://img.shields.io/badge/▶%EF%B8%8F%20Click%20Here%20to%20Watch%20Demo%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/rni0sTSGE2I)
+>
+> 🔗 **Direct URL**: [https://youtu.be/rni0sTSGE2I](https://youtu.be/rni0sTSGE2I)
+>
+> *Demonstrating interactive hotel search & date filtering, real-time availability counts, 10% Smart Stay long-stay discounts, pessimistic concurrency locking (`SELECT ... FOR UPDATE`), and instantaneous booking cancellations.*
+
 A modern, production-grade full-stack hotel booking platform built with **Java 17+ / Spring Boot 3**, **React 19 / Vite**, **Tailwind CSS**, and **MySQL**.
 
 Developed as a technical assessment demonstrating full-stack engineering, clean layered architecture, transactional concurrency control, database design, and end-to-end automated testing.
@@ -171,23 +187,8 @@ The application comes pre-populated with 6 hotels across India with inventory si
 
 ---
 
-## 📸 Screenshots & Demo Recording
-
-<!-- Screenshots will be added here -->
-| Hotel Search & Discovery | Live Price Breakdown & Booking |
-| :---: | :---: |
-| ![Hotel Search](https://placehold.co/600x350/1e1b4b/ffffff?text=Hotel+Search+and+Discovery) | ![Booking Flow](https://placehold.co/600x350/1e1b4b/ffffff?text=Price+Breakdown+and+Booking) |
-
-| Booking Confirmation Modal | Retrieve & Cancel Booking Portal |
-| :---: | :---: |
-| ![Confirmation](https://placehold.co/600x350/047857/ffffff?text=Booking+Confirmation+Reference) | ![Manage Booking](https://placehold.co/600x350/b91c1c/ffffff?text=Manage+and+Cancel+Booking) |
-
-> 🎥 **Demo Walkthrough Video**: [Watch Demo Video](#) *(Placeholder for demonstration video link)*
-
----
-
 ## ⚖️ Assessment Disclosures
 
 - **Approximate Time Spent**: ~14 hours across 9 sequential architectural milestones.
-- **Assistance Disclosed**: Built in collaboration with Google DeepMind's Antigravity AI agent, following strict incremental milestones, isolated Git commits, and code review verification at each phase.
+- **Assistance Disclosed**: Built in collaboration with Google DeepMind's Antigravity AI agent, following strict incremental milestones, and code review verification at each phase.
 - **Architecture Documentation**: For an in-depth review of concurrency locking, database constraints, overlapping stay mathematics, and trade-offs, please read [**`DESIGN.md`**](file:///d:/hotel_booking/DESIGN.md).
