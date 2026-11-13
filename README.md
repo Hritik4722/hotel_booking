@@ -65,39 +65,6 @@ Before running the application locally, ensure you have installed:
 
 ---
 
-## 🗄️ Database Setup
-
-### 1. Create the Database
-Log into your MySQL client (CLI, Workbench, or DBeaver) and create the database:
-```sql
-CREATE DATABASE IF NOT EXISTS hotel_booking;
-```
-
-### 2. Configure Credentials (Zero Secret Leakage)
-The backend uses environment variables with safe fallback defaults in [`application.properties`](file:///d:/hotel_booking/backend/src/main/resources/application.properties):
-- `DB_URL` (default: `jdbc:mysql://localhost:3306/hotel_booking?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true`)
-- `DB_USERNAME` (default: `root`)
-- `DB_PASSWORD` (default: `root`)
-
-To customize your database password for your local environment, set the `DB_PASSWORD` environment variable:
-- **Windows (PowerShell)**:
-  ```powershell
-  $env:DB_PASSWORD="your_mysql_password"
-  ```
-- **macOS / Linux**:
-  ```bash
-  export DB_PASSWORD="your_mysql_password"
-  ```
-
-### 3. Automated Seeding
-The backend is configured with an idempotent `DataInitializer` component ([`DataInitializer.java`](file:///d:/hotel_booking/backend/src/main/java/com/hotelbooking/config/DataInitializer.java)). On first startup, it automatically seeds 6 realistic Indian hotels into the `hotels` table if empty.
-
-*(Optional)* You can also manually inspect or run the raw SQL scripts:
-- DDL Schema: [`database/schema.sql`](file:///d:/hotel_booking/database/schema.sql)
-- Seed Data: [`database/seed.sql`](file:///d:/hotel_booking/database/seed.sql)
-
----
-
 ## 🐳 One-Click Docker Execution (Fastest & Recommended)
 
 The entire full-stack ecosystem is fully containerized with Docker and Docker Compose. A single command provisions the MySQL 8.0 database, initializes the schema and seed data, compiles and packages the Spring Boot backend, and builds the React 19 frontend served via an Nginx reverse proxy.
@@ -126,11 +93,12 @@ docker compose down -v
 ## 🚀 Running the Application Manually (Local Dev Mode)
 
 ### Step 1: Start the Spring Boot Backend
-1. Open a terminal and navigate to `/backend`:
+1. Ensure your local MySQL server is running on port `3306`.
+2. Open a terminal and navigate to `/backend`:
    ```bash
    cd backend
    ```
-2. Run the application using the included Maven Wrapper:
+3. Run the application using the included Maven Wrapper:
    - **Windows**:
      ```powershell
      .\mvnw.cmd spring-boot:run
@@ -139,8 +107,9 @@ docker compose down -v
      ```bash
      ./mvnw spring-boot:run
      ```
-3. The backend will start on **`http://localhost:8080`**.
-4. Visiting `http://localhost:8080/` in your browser will display an API health index and available endpoints.
+4. The backend will start on **`http://localhost:8080`**.
+   > **Note**: Database creation (`hotel_booking`) and sample hotel data seeding are handled **100% automatically** on first startup via `createDatabaseIfNotExist=true` and `DataInitializer.java`. Zero manual SQL execution is needed.
+5. Visiting `http://localhost:8080/` in your browser will display an API health index and available endpoints.
 
 ---
 
@@ -158,6 +127,27 @@ docker compose down -v
    npm run dev
    ```
 4. Open **`http://localhost:5173`** in your browser.
+
+---
+
+### ⚙️ Optional: Custom Database Credentials & Raw SQL
+
+By default, the backend connects automatically using standard local defaults (`root` / `root`) with `createDatabaseIfNotExist=true`. **Zero manual database configuration is needed.**
+
+If your local MySQL installation uses a custom password or port, you can customize it via environment variables:
+
+- **Windows (PowerShell)**:
+  ```powershell
+  $env:DB_PASSWORD="your_mysql_password"
+  ```
+- **macOS / Linux**:
+  ```bash
+  export DB_PASSWORD="your_mysql_password"
+  ```
+
+*(Optional)* The raw SQL scripts are also available for reference or inspection:
+- DDL Schema: [`database/schema.sql`](file:///d:/hotel_booking/database/schema.sql)
+- Sample Seed Data: [`database/seed.sql`](file:///d:/hotel_booking/database/seed.sql)
 
 ---
 
