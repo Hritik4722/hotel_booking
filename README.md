@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
 > [!IMPORTANT]
 > ### 🎬 Live Project Demonstration & Video Walkthrough
@@ -43,6 +44,7 @@ Developed as a technical assessment demonstrating full-stack engineering, clean 
 | **Backend** | Java 23 (compatible with 17+), Spring Boot 3.3.5, Spring Data JPA, Hibernate, Jakarta Bean Validation, Lombok |
 | **Frontend** | React 19, Vite 8, Tailwind CSS v4, React Router 7, Lucide React |
 | **Database** | MySQL 8.0+ (InnoDB, UTF-8mb4), with idempotent self-seeding `DataInitializer` |
+| **DevOps & Containers** | Docker, Docker Compose, Multi-Stage Container Builds, Nginx (Alpine reverse proxy) |
 | **Testing** | JUnit 5, Mockito, Spring Boot Test, MockMvc, AssertJ, H2 Database (in-memory MySQL mode) |
 
 ---
@@ -96,7 +98,32 @@ The backend is configured with an idempotent `DataInitializer` component ([`Data
 
 ---
 
-## 🚀 Running the Application Locally
+## 🐳 One-Click Docker Execution (Fastest & Recommended)
+
+The entire full-stack ecosystem is fully containerized with Docker and Docker Compose. A single command provisions the MySQL 8.0 database, initializes the schema and seed data, compiles and packages the Spring Boot backend, and builds the React 19 frontend served via an Nginx reverse proxy.
+
+```bash
+docker compose up --build
+```
+
+### 🌐 Accessing the Running Services:
+- **Frontend Portal**: [**`http://localhost:3000`**](http://localhost:3000) (also mapped to [**`http://localhost:5173`**](http://localhost:5173))
+- **Backend API & Health**: [**`http://localhost:8080/`**](http://localhost:8080/)
+- **Hotel Discovery API**: [**`http://localhost:8080/api/hotels`**](http://localhost:8080/api/hotels)
+- **MySQL Database**: `localhost:3306` (Credentials: `root` / `root`, DB: `hotel_booking`)
+
+To stop all services:
+```bash
+docker compose down
+```
+To purge the database volume and re-seed from scratch:
+```bash
+docker compose down -v
+```
+
+---
+
+## 🚀 Running the Application Manually (Local Dev Mode)
 
 ### Step 1: Start the Spring Boot Backend
 1. Open a terminal and navigate to `/backend`:
