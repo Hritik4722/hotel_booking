@@ -85,6 +85,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNoResourceFoundException(
+        org.springframework.web.servlet.resource.NoResourceFoundException ex
+    ) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.NOT_FOUND.value())
+            .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+            .message("Static resource not found: " + ex.getResourcePath())
+            .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
         ErrorResponse errorResponse = ErrorResponse.builder()
