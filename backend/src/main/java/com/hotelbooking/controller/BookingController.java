@@ -2,6 +2,7 @@ package com.hotelbooking.controller;
 
 import com.hotelbooking.dto.BookingRequestDTO;
 import com.hotelbooking.dto.BookingResponseDTO;
+import com.hotelbooking.dto.CancelBookingRequestDTO;
 import com.hotelbooking.service.BookingService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -51,14 +52,18 @@ public class BookingController {
 
     /**
      * Cancel an existing booking after verifying the guest's email.
-     * POST /api/bookings/{reference}/cancel?email=
+     * POST /api/bookings/{reference}/cancel
+     *
+     * @param reference Unique booking reference in the path
+     * @param request   Request payload containing guest email for identity verification
+     * @return Updated booking response with CANCELLED status
      */
     @PostMapping("/{reference}/cancel")
     public ResponseEntity<BookingResponseDTO> cancelBooking(
         @PathVariable String reference,
-        @RequestParam String email
+        @Valid @RequestBody CancelBookingRequestDTO request
     ) {
-        BookingResponseDTO response = bookingService.cancelBooking(reference, email);
+        BookingResponseDTO response = bookingService.cancelBooking(reference, request.getEmail());
         return ResponseEntity.ok(response);
     }
 }

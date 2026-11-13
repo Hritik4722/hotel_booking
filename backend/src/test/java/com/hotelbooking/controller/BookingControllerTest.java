@@ -3,6 +3,7 @@ package com.hotelbooking.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotelbooking.dto.BookingRequestDTO;
 import com.hotelbooking.dto.BookingResponseDTO;
+import com.hotelbooking.dto.CancelBookingRequestDTO;
 import com.hotelbooking.entity.BookingStatus;
 import com.hotelbooking.exception.GlobalExceptionHandler;
 import com.hotelbooking.exception.ResourceNotFoundException;
@@ -169,6 +170,10 @@ class BookingControllerTest {
     @Test
     @DisplayName("POST /api/bookings/{reference}/cancel - should cancel booking and return updated DTO")
     void testCancelBookingSuccess() throws Exception {
+        CancelBookingRequestDTO cancelRequest = CancelBookingRequestDTO.builder()
+            .email("rahul@example.com")
+            .build();
+
         BookingResponseDTO response = BookingResponseDTO.builder()
             .id(1L)
             .bookingReference("TCT-ABC123")
@@ -180,10 +185,26 @@ class BookingControllerTest {
         when(bookingService.cancelBooking(eq("TCT-ABC123"), eq("rahul@example.com"))).thenReturn(response);
 
         mockMvc.perform(post("/api/bookings/TCT-ABC123/cancel")
-                .param("email", "rahul@example.com")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(cancelRequest)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.bookingReference").value("TCT-ABC123"))
             .andExpect(jsonPath("$.status").value("CANCELLED"));
+    }
+
+    @Test
+    @DisplayName("POST /api/bookings/{reference}/cancel - should return 400 Bad Request on invalid/blank email in request body")
+    void testCancelBookingValidationFailure() throws Exception {
+        CancelBookingRequestDTO invalidRequest = CancelBookingRequestDTO.builder()
+            .email("not-a-valid-email")
+            .build();
+
+        mockMvc.perform(post("/api/bookings/TCT-ABC123/cancel")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidRequest)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.status").value(400))
+            .andExpect(jsonPath("$.error").value("Bad Request"))
+            .andExpect(jsonPath("$.fieldErrors.email").exists());
     }
 }
